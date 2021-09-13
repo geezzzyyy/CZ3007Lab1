@@ -43,6 +43,8 @@ Alpha = [a-zA-Z]
 
 %%
 /* put in your rules here.    */
+
+/*punctuation*/
 "," {return token(COMMA);}
 "[" {return token(LBRACKET);}
 "{" {return token(LCURLY);}
@@ -52,13 +54,29 @@ Alpha = [a-zA-Z]
 ")" {return token(RPAREN);}
 ";" {return token(SEMICOLON);}
 
+/*operators*/
 "+" {return token(PLUS);}
+"-" {return token(MINUS);}
+"*" {return token(TIMES);}
+"/" {return token(DIV);}
+">" {return token(GT);}
+"<" {return token(LT);}
+">=" {return token(GEQ);}
+"<=" {return token(LEQ);}
+"=" {return token(EQL);}
+"==" {return token(EQEQ);}
+"!=" {return token(NEQ);}
 
+/*ID*/
 {Alpha}({Alpha}|{Digit}|"_")* {return token(ID);}
 
+/*literals*/
+
+("+" | "-") ?{Digit}+ {return token(INT_LITERAL);}
 \"[^(\n|\")]*\" {return token(STRING_LITERAL, yytext().substring(1,yytext().length()-1));}
 
 {WhiteSpace} {}
+
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }
