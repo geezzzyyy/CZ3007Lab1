@@ -37,11 +37,28 @@ import static frontend.Token.Type.*;
 
 /* This definition may come in handy. If you wish, you can add more definitions here. */
 WhiteSpace = [ ] | \t | \f | \n | \r
+Digit = [0-9]
+Alpha = [a-zA-Z]
 
 
 %%
 /* put in your rules here.    */
+"," {return token(COMMA);}
+"[" {return token(LBRACKET);}
+"{" {return token(LCURLY);}
+"(" {return token(LPAREN);}
+"]" {return token(RBRACKET);}
+"}" {return token(RCURLY);}
+")" {return token(RPAREN);}
+";" {return token(SEMICOLON);}
+
 "+" {return token(PLUS);}
+
+{Alpha}({Alpha}|{Digit}|"_")* {return token(ID);}
+
+\"[^(\n|\")]*\" {return token(STRING_LITERAL, yytext().substring(1,yytext().length()-1));}
+
+{WhiteSpace} {}
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }
