@@ -71,10 +71,56 @@ public class LexerTests {
 	}
 	
 	@Test
+	public void testfalseStringLiteral() {
+		runtest("\"a\\\"\"", 
+				new Token(STRING_LITERAL, 0, 0, "a\\"),
+				(Token)null,
+				new Token(EOF, 0, 5, ""));
+	}
+	
+	@Test
+	public void testNormalStringLiteral() {
+		runtest("\"test String\"", 
+				new Token(STRING_LITERAL, 0, 0, "test String"),
+				new Token(EOF, 0, 13, ""));
+	}
+	
+	@Test
+	public void testPunctuation() {
+		runtest(",[{(  )}];", 
+				new Token(COMMA, 0, 0, ","),
+				new Token(LBRACKET, 0, 1, "["),
+				new Token(LCURLY, 0, 2, "{"),
+				new Token(LPAREN, 0, 3, "("),
+				new Token(RPAREN, 0, 6, ")"),
+				new Token(RCURLY, 0, 7, "}"),
+				new Token(RBRACKET, 0, 8, "]"),
+				new Token(SEMICOLON, 0, 9, ";"),
+				new Token(EOF, 0, 10, ""));
+	}
+	
+	@Test
 	public void testPlus() {
 		runtest("+", 
 				new Token(PLUS, 0, 0, "+"),
 				new Token(EOF, 0, 1, ""));
+	}
+	
+	@Test
+	public void testID() {
+		runtest("aA_09A", 
+				new Token(ID, 0, 0, "aA_09A"),
+				new Token(EOF, 0, 6, ""));
+	}
+	
+	@Test
+	public void testFalseIDWithUnderscope() {
+		runtest("_09A", 
+				(Token)null,
+				(Token)null,
+				(Token)null,
+				(Token)null,
+				new Token(EOF, 0, 4, ""));
 	}
 
 }
