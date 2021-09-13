@@ -107,6 +107,94 @@ public class LexerTests {
 	}
 	
 	@Test
+	public void testMinus() {
+		runtest("-", 
+				new Token(MINUS, 0, 0, "-"),
+				new Token(EOF, 0, 1, ""));
+	}
+	
+	@Test
+	public void testTimes() {
+		runtest("*", 
+				new Token(TIMES, 0, 0, "*"),
+				new Token(EOF, 0, 1, ""));
+	}
+	
+	@Test
+	public void testDiv() {
+		runtest("/", 
+				new Token(DIV, 0, 0, "/"),
+				new Token(EOF, 0, 1, ""));
+	}
+	
+	@Test
+	public void testGt() {
+		runtest(">", 
+				new Token(GT, 0, 0, ">"),
+				new Token(EOF, 0, 1, ""));
+	}
+	
+	@Test
+	public void testLt() {
+		runtest("<", 
+				new Token(LT, 0, 0, "<"),
+				new Token(EOF, 0, 1, ""));
+	}
+	
+	@Test
+	public void testGeq() {
+		runtest(">=", 
+				new Token(GEQ, 0, 0, ">="),
+				new Token(EOF, 0, 2, ""));
+	}
+	
+	@Test
+	public void testLeq() {
+		runtest("<=", 
+				new Token(LEQ, 0, 0, "<="),
+				new Token(EOF, 0, 2, ""));
+	}
+	
+	@Test
+	public void testEql() {
+		runtest("=", 
+				new Token(EQL, 0, 0, "="),
+				new Token(EOF, 0, 1, ""));
+	}
+	
+	@Test
+	public void testEqeq() {
+		runtest("==", 
+				new Token(EQEQ, 0, 0, "=="),
+				new Token(EOF, 0, 2, ""));
+	}
+	
+	@Test
+	public void testNeq() {
+		runtest("!=", 
+				new Token(NEQ, 0, 0, "!="),
+				new Token(EOF, 0, 2, ""));
+	}
+	
+	@Test
+	public void testInt_literal() {
+		runtest("+0090", 
+				new Token(INT_LITERAL, 0, 0, "+0090"),
+				new Token(EOF, 0, 5, ""));
+	}
+	
+	@Test
+	public void testFalseInt_literal() {
+		runtest("a090",
+				(Token)null,
+				(Token)null,
+				(Token)null,
+				(Token)null,
+		new Token(EOF, 0, 4, ""));
+	}
+	
+	
+	@Test
 	public void testID() {
 		runtest("aA_09A", 
 				new Token(ID, 0, 0, "aA_09A"),
