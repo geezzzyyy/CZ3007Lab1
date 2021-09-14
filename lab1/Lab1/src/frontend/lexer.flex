@@ -44,6 +44,22 @@ Alpha = [a-zA-Z]
 %%
 /* put in your rules here.    */
 
+// Keywords
+"boolean" { return token(BOOLEAN); }
+"break" { return token(BREAK);}
+"else" { return token(ELSE);}
+"false" { return token(FALSE);}
+"if" { return token(IF);}
+"import" { return token(IMPORT);}
+"int" { return token(INT);}
+"module" { return token(MODULE);}
+"public" { return token(PUBLIC);}
+"return" { return token(RETURN);}
+"true" { return token(TRUE);}
+"type" { return token(TYPE);}
+"void" { return token(VOID);}
+"while" { return token(WHILE);}
+
 /*punctuation*/
 "," {return token(COMMA);}
 "[" {return token(LBRACKET);}
